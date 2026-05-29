@@ -125,11 +125,22 @@ const pillTours = pill ? pill.querySelector('.pill-tours') : null;
 // (see below) — never pushed when paddling is unsafe.
 if (pill) {
   const cond = pill.querySelector('.pill-conditions');
-  if (cond) cond.addEventListener('click', () =>
-    document.getElementById('safety').scrollIntoView({ behavior: 'smooth' }));
-  if (pillTours) pillTours.addEventListener('click', () =>
-    document.getElementById('tour-map').scrollIntoView({ behavior: 'smooth' }));
+  if (cond) cond.addEventListener('click', () => {
+    // Safety section lives on the homepage; on other pages (e.g. operators)
+    // jump to it cross-page.
+    const safety = document.getElementById('safety');
+    if (safety) safety.scrollIntoView({ behavior: 'smooth' });
+    else window.location.href = 'index.html#safety';
+  });
+  if (pillTours) pillTours.addEventListener('click', () => {
+    const map = document.getElementById('tour-map');
+    if (map) map.scrollIntoView({ behavior: 'smooth' });
+  });
 }
+
+// Set true once live conditions have loaded — gates pill visibility without
+// depending on the (homepage-only) weather widget element.
+let conditionsLoaded = false;
 
 function degToCompass(d) {
   const dirs = ['N','NE','E','SE','S','SW','W','NW'];
@@ -154,7 +165,7 @@ const WMO = {
   96:'Thunderstorm + hail', 99:'Thunderstorm + heavy hail'
 };
 
-if (weatherEl) {
+if (weatherEl || pill) {
   fetch('https://api.open-meteo.com/v1/forecast?latitude=35.89&longitude=-114.69' +
     '&current=temperature_2m,wind_speed_10m,wind_gusts_10m,wind_direction_10m,uv_index,weathercode' +
     '&hourly=wind_speed_10m,wind_direction_10m' +
@@ -198,6 +209,10 @@ if (weatherEl) {
         </div>`;
       }).join('');
 
+      conditionsLoaded = true;
+
+      // The full conditions panel only exists on the homepage (#weatherWidget).
+      if (weatherEl) {
       weatherEl.classList.add('loaded');
       weatherEl.innerHTML = `
         <div class="weather-header">
@@ -235,6 +250,7 @@ if (weatherEl) {
         <div class="river-note">
           <strong>River: 54°F / 12°C year-round</strong> — water is drawn from the bottom of Lake Mead through Hoover Dam's penstocks, not the sun-warmed surface. The river stays cold regardless of air temperature. Cold-shock risk on capsize even in summer heat.
         </div>`;
+      }
 
       // populate floating pill
       if (pill) {
@@ -251,11 +267,12 @@ if (weatherEl) {
     });
 }
 
-// show pill after scrolling past hero
+// show pill after scrolling past the hero (facts-bar on the homepage, the hero
+// section elsewhere — e.g. operators page, which has no facts-bar)
 if (pill) {
-  const heroEnd = document.querySelector('.facts-bar');
+  const heroEnd = document.querySelector('.facts-bar') || document.querySelector('.hero');
   const obs = new IntersectionObserver(([e]) => {
-    if (!e.isIntersecting && weatherEl && weatherEl.classList.contains('loaded'))
+    if (!e.isIntersecting && conditionsLoaded)
       pill.style.display = 'flex';
     else
       pill.style.display = 'none';
