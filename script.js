@@ -364,10 +364,28 @@ document.addEventListener('keydown', e => {
       // Paddle route line.
       L.polyline(ROUTE, { color: '#1d5c4d', weight: 4, opacity: 0.85, dashArray: '1,8', lineCap: 'round' }).addTo(map);
 
-      // Top Viator tour's affiliate token (base64) for the cave-marker CTA —
-      // reuse the first list card so there's a single source of truth.
-      const topTour = document.querySelector('.ec-tour');
-      const topVurl = topTour ? topTour.getAttribute('data-vurl') : null;
+      // Featured-tour card for the cave marker — photo + title + rating/price,
+      // whole card clickable. Built from the #1 rendered list card so the DOM
+      // stays the single source of truth (mirrors the besttimetovisit popup
+      // pattern, where each map popup IS a tour card with image + meta).
+      function featuredCardHtml() {
+        const top = document.querySelector('.ec-tour');
+        if (!top) return '';
+        const vurl   = top.getAttribute('data-vurl');
+        const thumb  = (top.querySelector('.ec-thumb') || {}).src || '';
+        const title  = (top.querySelector('.ec-title')  || {}).textContent || '';
+        const rating = (top.querySelector('.ec-rating') || {}).textContent || '';
+        const price  = (top.querySelector('.ec-price')  || {}).textContent || '';
+        const meta   = [rating, price].filter(Boolean).join(' · ');
+        return '<a class="vlink ec-pop-card" data-vurl="' + vurl + '" role="link" rel="sponsored nofollow noopener" tabindex="0">' +
+          (thumb ? '<img class="ec-pop-img" src="' + escapeHtml(thumb) + '" alt="" loading="lazy" width="220" height="132">' : '') +
+          '<span class="ec-pop-cardbody">' +
+          '<span class="ec-pop-eyebrow">Emerald Cave · most booked tour</span>' +
+          '<strong class="ec-pop-cardtitle">' + escapeHtml(title) + '</strong>' +
+          (meta ? '<span class="ec-pop-cardmeta">' + escapeHtml(meta) + '</span>' : '') +
+          '<span class="ec-pop-cardcta">Check availability →</span>' +
+          '</span></a>';
+      }
 
       const group = L.featureGroup();
       POIS.forEach(p => {
@@ -378,14 +396,17 @@ document.addEventListener('keydown', e => {
             iconSize: [30, 30], iconAnchor: [15, 15], popupAnchor: [0, -16],
           }),
         });
-        const ctaHtml = (p.cta && topVurl)
-          ? '<a class="vlink ec-pop-cta" data-vurl="' + topVurl + '" role="link" rel="sponsored nofollow noopener" tabindex="0">Book a kayak tour →</a>'
-          : '';
-        m.bindPopup(
-          '<div class="ec-pop"><strong class="ec-pop-title">' + escapeHtml(p.title) + '</strong>' +
-          '<span class="ec-pop-sub">' + escapeHtml(p.sub) + '</span>' + ctaHtml + '</div>',
-          { maxWidth: 240, minWidth: 200 }
-        );
+        if (p.cta) {
+          // Cave marker → rich tour card (image bleeds to popup edges).
+          m.bindPopup(featuredCardHtml(), { maxWidth: 240, minWidth: 220, className: 'ec-cardpop' });
+        } else {
+          // Other landmarks → plain place-info popup.
+          m.bindPopup(
+            '<div class="ec-pop"><strong class="ec-pop-title">' + escapeHtml(p.title) + '</strong>' +
+            '<span class="ec-pop-sub">' + escapeHtml(p.sub) + '</span></div>',
+            { maxWidth: 240, minWidth: 200 }
+          );
+        }
         m.addTo(group);
       });
       group.addTo(map);

@@ -239,15 +239,34 @@ blockquote.voice cite { font-size: .78rem; color: var(--muted); font-style: norm
   box-shadow: 0 1px 5px rgba(0,0,0,.4);
 }
 .ec-pin-cave { background: var(--accent); border-color: #fff; font-size: 16px; box-shadow: 0 1px 6px rgba(0,0,0,.5); }
+/* Plain place-info popup (marina, hot springs, dam) */
 .ec-pop { display: block; line-height: 1.4; }
 .ec-pop-title { display: block; font-family: var(--serif); font-size: 1rem; color: var(--text); margin-bottom: .25rem; }
 .ec-pop-sub { display: block; font-size: .82rem; color: var(--muted); }
-.ec-pop-cta {
-  display: inline-block; margin-top: .55rem; font-size: .85rem; font-weight: 700;
-  color: #fff; background: var(--accent); padding: .35rem .7rem; border-radius: 3px;
-  text-decoration: none; cursor: pointer;
+
+/* Featured-tour card popup (cave marker) — image bleeds to the popup edges,
+   matching the besttimetovisit map-popup pattern. Padding overrides are
+   scoped to .ec-cardpop so plain place popups keep their default padding. */
+.ec-cardpop .leaflet-popup-content { margin: 0; width: 220px !important; }
+.ec-cardpop .leaflet-popup-content-wrapper { padding: 0; overflow: hidden; border-radius: 8px; }
+.ec-pop-card { display: block; color: inherit; text-decoration: none; cursor: pointer; }
+.ec-pop-card:hover { text-decoration: none; }
+.ec-pop-img {
+  display: block; width: 100%; height: auto;
+  aspect-ratio: 220 / 132; object-fit: cover; background: var(--bg-alt);
 }
-.ec-pop-cta:hover { background: #16493d; text-decoration: none; }
+.ec-pop-cardbody { display: block; padding: .6rem .7rem .7rem; }
+.ec-pop-eyebrow {
+  display: block; font-size: .64rem; font-weight: 800; letter-spacing: .07em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: .25rem;
+}
+.ec-pop-cardtitle {
+  display: block; font-family: var(--serif); color: var(--text);
+  font-weight: 700; font-size: .92rem; line-height: 1.25; margin-bottom: .25rem;
+}
+.ec-pop-cardmeta { display: block; color: var(--muted); font-size: .8rem; }
+.ec-pop-cardcta { display: block; margin-top: .45rem; font-size: .82rem; font-weight: 700; color: var(--accent); }
+.ec-pop-card:hover .ec-pop-cardtitle { color: var(--accent); }
 
 /* ── DATA TABLE ─────────────────────────────────────────── */
 .table-wrap { overflow-x: auto; margin: 1.4rem 0; border: 1px solid var(--border); }
