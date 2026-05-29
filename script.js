@@ -264,6 +264,8 @@ document.querySelectorAll('.scroll-gallery').forEach(g => {
 });
 
 // ── SMOOTH SCROLL (fallback for older browsers) ─────────────
+// Scoped to in-page anchors only. .vlink (affiliate links) have no href, so
+// they're untouched here — handled by the affiliate click handler below.
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const target = document.querySelector(a.getAttribute('href'));
@@ -273,3 +275,136 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
   });
 });
+
+// ── AFFILIATE LINK HANDLER (.vlink) ─────────────────────────
+// Affiliate URLs are base64-encoded in data-vurl rather than written as plain
+// hrefs — keeps the outbound-affiliate footprint out of the static HTML
+// (mirrors the besttimetovisit DestinationMap pattern). The whole card (and
+// the map popup CTA) is clickable; this decodes and opens in a new tab.
+// Registered globally so it also covers popups injected later by Leaflet.
+function openVlink(target) {
+  if (!target || !target.dataset || !target.dataset.vurl) return;
+  try {
+    window.open(atob(target.dataset.vurl), '_blank', 'noopener,noreferrer');
+  } catch (e) { /* swallow malformed token */ }
+}
+document.addEventListener('click', e => {
+  const link = e.target.closest && e.target.closest('.vlink');
+  if (!link) return;
+  e.preventDefault();
+  openVlink(link);
+});
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const link = e.target.closest && e.target.closest('.vlink');
+  if (!link) return;
+  e.preventDefault();
+  openVlink(link);
+});
+
+// ── EMERALD CAVE LEAFLET MAP ────────────────────────────────
+// Cave-centric orientation map: hand-set POI coordinates (the bookable Viator
+// tours geocode to the Vegas pickup point ~36 mi away, so they're surfaced as
+// the list above instead of map markers). Leaflet + OpenStreetMap, no API key.
+// Lazy-loaded from CDN only when the map scrolls into view — saves ~140 KB on
+// bounces. Matches the besttimetovisit DestinationMap loader.
+(function () {
+  const el = document.getElementById('ecMap');
+  if (!el) return;
+
+  const LEAFLET_CSS = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+  const LEAFLET_JS  = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+
+  // Accurate, hand-set landmark coordinates (NOT from Viator).
+  const POIS = [
+    { lat: 35.890861, lon: -114.6855819, kind: 'cave',   icon: '◆',
+      title: 'Emerald Cave', sub: 'The destination — 2.2 mi upstream of Willow Beach. Peak glow 10am–2pm.', cta: true },
+    { lat: 35.8677,    lon: -114.6705,    kind: 'launch', icon: '🛶',
+      title: 'Willow Beach Marina', sub: 'The only public launch. DIY kayak/SUP rentals from $65/day; guided-tour put-in.' },
+    { lat: 35.9756,    lon: -114.7290,    kind: 'spring', icon: '♨',
+      title: 'Arizona Hot Springs', sub: 'Geothermal pools upstream — included on some full-day Hoover Dam tours.' },
+    { lat: 36.0161,    lon: -114.7377,    kind: 'dam',    icon: '🏞',
+      title: 'Hoover Dam', sub: 'Full-day tours launch here (NPS-authorized operators only) for the 12-mile run.' },
+  ];
+
+  // Approximate paddle route, Willow Beach → Emerald Cave (upstream, ~2.2 mi).
+  const ROUTE = [
+    [35.8677, -114.6705], [35.8745, -114.6720], [35.8810, -114.6790],
+    [35.8862, -114.6835], [35.890861, -114.6855819],
+  ];
+
+  function loadLeaflet() {
+    if (window.L) return Promise.resolve(window.L);
+    return new Promise((resolve, reject) => {
+      const css = document.createElement('link');
+      css.rel = 'stylesheet'; css.href = LEAFLET_CSS; document.head.appendChild(css);
+      const s = document.createElement('script');
+      s.src = LEAFLET_JS;
+      s.onload = () => resolve(window.L);
+      s.onerror = () => reject(new Error('Leaflet failed to load'));
+      document.head.appendChild(s);
+    });
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+
+  function initMap() {
+    if (el.dataset.initialized) return;
+    el.dataset.initialized = '1';
+    loadLeaflet().then(L => {
+      const map = L.map(el, { scrollWheelZoom: false }).setView([35.928, -114.69], 12);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18,
+      }).addTo(map);
+
+      // Paddle route line.
+      L.polyline(ROUTE, { color: '#1d5c4d', weight: 4, opacity: 0.85, dashArray: '1,8', lineCap: 'round' }).addTo(map);
+
+      // Top Viator tour's affiliate token (base64) for the cave-marker CTA —
+      // reuse the first list card so there's a single source of truth.
+      const topTour = document.querySelector('.ec-tour');
+      const topVurl = topTour ? topTour.getAttribute('data-vurl') : null;
+
+      const group = L.featureGroup();
+      POIS.forEach(p => {
+        const m = L.marker([p.lat, p.lon], {
+          icon: L.divIcon({
+            className: '',
+            html: '<span class="ec-pin ec-pin-' + p.kind + '">' + p.icon + '</span>',
+            iconSize: [30, 30], iconAnchor: [15, 15], popupAnchor: [0, -16],
+          }),
+        });
+        const ctaHtml = (p.cta && topVurl)
+          ? '<a class="vlink ec-pop-cta" data-vurl="' + topVurl + '" role="link" rel="sponsored nofollow noopener" tabindex="0">Book a kayak tour →</a>'
+          : '';
+        m.bindPopup(
+          '<div class="ec-pop"><strong class="ec-pop-title">' + escapeHtml(p.title) + '</strong>' +
+          '<span class="ec-pop-sub">' + escapeHtml(p.sub) + '</span>' + ctaHtml + '</div>',
+          { maxWidth: 240, minWidth: 200 }
+        );
+        m.addTo(group);
+      });
+      group.addTo(map);
+
+      const b = group.getBounds();
+      if (b.isValid()) map.fitBounds(b.pad(0.18), { maxZoom: 13 });
+      map.once('click', () => map.scrollWheelZoom.enable());
+    }).catch(() => {
+      el.innerHTML = '<p class="tm-mapfail">Map unavailable — Emerald Cave is at 35.8909°N, 114.6856°W, ' +
+        '2.2 mi upstream of Willow Beach Marina. <a href="#maps">See the static maps below.</a></p>';
+    });
+  }
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { initMap(); io.unobserve(e.target); } });
+    }, { rootMargin: '200px' });
+    io.observe(el);
+  } else {
+    initMap();
+  }
+})();
