@@ -388,6 +388,7 @@ document.addEventListener('keydown', e => {
       }
 
       const group = L.featureGroup();
+      let caveMarker = null;
       POIS.forEach(p => {
         const m = L.marker([p.lat, p.lon], {
           icon: L.divIcon({
@@ -398,7 +399,11 @@ document.addEventListener('keydown', e => {
         });
         if (p.cta) {
           // Cave marker → rich tour card (image bleeds to popup edges).
-          m.bindPopup(featuredCardHtml(), { maxWidth: 240, minWidth: 220, className: 'ec-cardpop' });
+          // autoPan:false so opening it on load doesn't shove the fitBounds
+          // framing around — the cave sits low in the bounds and the card
+          // opens upward into open map space.
+          m.bindPopup(featuredCardHtml(), { maxWidth: 240, minWidth: 220, className: 'ec-cardpop', autoPan: false });
+          caveMarker = m;
         } else {
           // Other landmarks → plain place-info popup.
           m.bindPopup(
@@ -413,6 +418,9 @@ document.addEventListener('keydown', e => {
 
       const b = group.getBounds();
       if (b.isValid()) map.fitBounds(b.pad(0.18), { maxZoom: 13 });
+      // Show the featured-tour card on load (as if the cave marker were clicked)
+      // so the bookable tour is visible without interaction.
+      if (caveMarker) caveMarker.openPopup();
       map.once('click', () => map.scrollWheelZoom.enable());
     }).catch(() => {
       el.innerHTML = '<p class="tm-mapfail">Map unavailable — Emerald Cave is at 35.8909°N, 114.6856°W, ' +
