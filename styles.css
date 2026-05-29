@@ -224,6 +224,12 @@ blockquote.voice cite { font-size: .78rem; color: var(--muted); font-style: norm
 .ec-price { color: var(--text); font-weight: 700; }
 .ec-dur { color: var(--muted); }
 .ec-hot { color: var(--danger); font-weight: 700; }
+.ec-pickup {
+  font-size: .72rem; font-weight: 700; color: var(--accent);
+  background: var(--accent-lt); border-radius: 3px; padding: .08rem .4rem;
+  white-space: nowrap;
+}
+.ec-pickup-meet { color: var(--muted); background: var(--bg-alt); }
 .ec-cta {
   font-size: .82rem; font-weight: 700; color: var(--accent);
   white-space: nowrap; padding-left: .4rem;
@@ -508,17 +514,24 @@ blockquote.voice cite { font-size: .78rem; color: var(--muted); font-style: norm
 /* ── FLOATING CONDITIONS PILL ───────────────────────────── */
 .conditions-pill {
   position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
-  display: none; align-items: center; gap: .55rem;
+  display: none; align-items: stretch;
   background: var(--text); color: #fff;
-  padding: .55rem 1rem .55rem .75rem;
-  border-radius: 2rem; cursor: pointer;
+  border-radius: 2rem; overflow: hidden;
   box-shadow: 0 4px 16px rgba(0,0,0,.25);
-  text-decoration: none; font-size: .8rem; font-weight: 700;
+  font-size: .8rem; font-weight: 700;
   letter-spacing: .02em; white-space: nowrap;
+  font-family: var(--sans);
   transition: transform .15s ease, box-shadow .15s ease;
-  border: none; font-family: var(--sans);
 }
-.conditions-pill:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.3); color: #fff; text-decoration: none; }
+.conditions-pill:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.3); }
+.conditions-pill button {
+  background: none; border: none; color: inherit; font: inherit; cursor: pointer;
+  display: flex; align-items: center; gap: .55rem;
+  padding: .55rem 1rem; transition: background .15s ease;
+}
+.conditions-pill button[hidden] { display: none; }
+.conditions-pill button:hover { background: rgba(255,255,255,.1); }
+.conditions-pill .pill-conditions { padding-left: .85rem; }
 .conditions-pill .pill-dot {
   width: 8px; height: 8px; border-radius: 50%;
   animation: pulse-dot 2s ease-in-out infinite; flex-shrink: 0;
@@ -527,6 +540,9 @@ blockquote.voice cite { font-size: .78rem; color: var(--muted); font-style: norm
 .conditions-pill .pill-dot.caution { background: #f4c842; }
 .conditions-pill .pill-dot.hold    { background: #e06060; }
 .conditions-pill .pill-wind { opacity: .75; font-weight: 400; margin-left: .1rem; }
+.conditions-pill .pill-tours {
+  color: #8fe0c4; border-left: 1px solid rgba(255,255,255,.22);
+}
 
 @media (max-width: 768px) {
   .weather-body { grid-template-columns: 1fr; }

@@ -168,6 +168,7 @@
             <span class="ec-meta">
               <span class="ec-rating">4.92★ (5,176)</span>
               <span class="ec-price">from $99</span>
+              <span class="ec-pickup">Strip hotel pickup</span>
               <span class="ec-hot">🔥 Selling fast</span>
             </span>
           </span>
@@ -184,6 +185,7 @@
               <span class="ec-rating">4.97★ (1,327)</span>
               <span class="ec-price">from $149</span>
               <span class="ec-dur">3h</span>
+              <span class="ec-pickup">Strip hotel pickup</span>
               <span class="ec-hot">🔥 Selling fast</span>
             </span>
           </span>
@@ -200,6 +202,7 @@
               <span class="ec-rating">4.90★ (544)</span>
               <span class="ec-price">from $88</span>
               <span class="ec-dur">3h 30m</span>
+              <span class="ec-pickup ec-pickup-meet">Willow Beach meet-up</span>
               <span class="ec-hot">🔥 Selling fast</span>
             </span>
           </span>
@@ -216,6 +219,7 @@
               <span class="ec-rating">4.83★ (274)</span>
               <span class="ec-price">from $79</span>
               <span class="ec-dur">6h</span>
+              <span class="ec-pickup">Strip hotel pickup</span>
               <span class="ec-hot">🔥 Selling fast</span>
             </span>
           </span>
@@ -232,6 +236,7 @@
               <span class="ec-rating">4.87★ (3,038)</span>
               <span class="ec-price">from $89</span>
               <span class="ec-dur">6h</span>
+              <span class="ec-pickup">Strip hotel pickup</span>
             </span>
           </span>
           <span class="ec-cta">Check availability →</span>
@@ -247,6 +252,7 @@
               <span class="ec-rating">4.94★ (1,579)</span>
               <span class="ec-price">from $110</span>
               <span class="ec-dur">3h</span>
+              <span class="ec-pickup">Strip hotel pickup</span>
             </span>
           </span>
           <span class="ec-cta">Check availability →</span>
@@ -736,11 +742,14 @@
 </footer>
 
 <!-- FLOATING CONDITIONS PILL -->
-<button class="conditions-pill" id="conditionsPill" onclick="document.getElementById('safety').scrollIntoView({behavior:'smooth'})" aria-label="View live paddling conditions">
-  <span class="pill-dot"></span>
-  <span>Willow Beach conditions</span>
-  <span class="pill-wind"></span>
-</button>
+<div class="conditions-pill" id="conditionsPill" aria-label="Live paddling conditions">
+  <button type="button" class="pill-conditions" aria-label="View live paddling conditions">
+    <span class="pill-dot"></span>
+    <span class="pill-label">Willow Beach conditions</span>
+    <span class="pill-wind"></span>
+  </button>
+  <button type="button" class="pill-tours" hidden aria-label="Jump to bookable kayak tours">see kayak tours →</button>
+</div>
 
 <script src="script.js"></script>
 </body>

@@ -1,0 +1,101 @@
+{
+  "destination": "Emerald Cave / Black Canyon, Colorado River",
+  "viator_destination_id": 684,
+  "fetched_at": "2026-05-29",
+  "campaign": "emeraldcavevegas-operators",
+  "products": [
+    {
+      "code": "26719P8",
+      "title": "Half-Day Emerald Cave Kayak Tour with Optional Hotel Pickup",
+      "url": "https://www.viator.com/tours/Las-Vegas/Emerald-Cave-Kayaking-Tour/d684-26719P8?mcid=42383&pid=P00282225&medium=api&api_version=2.0&campaign=emeraldcavevegas-operators",
+      "thumb": "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-400x400/15/57/fd/8d.jpg",
+      "rating": 4.918277,
+      "reviews": 5176,
+      "price": 99.0,
+      "currency": "USD",
+      "duration_minutes": null,
+      "flags": [
+        "FREE_CANCELLATION",
+        "LIKELY_TO_SELL_OUT"
+      ],
+      "score": 145
+    },
+    {
+      "code": "39939P2",
+      "title": "Emerald Cave & Black Canyon Kayak Tour with Vegas Pickup",
+      "url": "https://www.viator.com/tours/Las-Vegas/Half-or-Full-Day-Kayaking-Tour-on-the-Colorado-River-from-Las-Vegas/d684-39939P2?mcid=42383&pid=P00282225&medium=api&api_version=2.0&campaign=emeraldcavevegas-operators",
+      "thumb": "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-400x400/10/07/9a/1f.jpg",
+      "rating": 4.966089,
+      "reviews": 1327,
+      "price": 149.0,
+      "currency": "USD",
+      "duration_minutes": 180,
+      "flags": [
+        "FREE_CANCELLATION",
+        "LIKELY_TO_SELL_OUT"
+      ],
+      "score": 145
+    },
+    {
+      "code": "301052P1",
+      "title": "Small Group Guided Colorado River & Emerald Cave Kayak Tour",
+      "url": "https://www.viator.com/tours/Las-Vegas/Colorado-River-Half-Day-Kayak-Tour/d684-301052P1?mcid=42383&pid=P00282225&medium=api&api_version=2.0&campaign=emeraldcavevegas-operators",
+      "thumb": "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-400x400/11/ad/2b/24.jpg",
+      "rating": 4.904412,
+      "reviews": 544,
+      "price": 88.0,
+      "currency": "USD",
+      "duration_minutes": 210,
+      "flags": [
+        "LIKELY_TO_SELL_OUT"
+      ],
+      "score": 125
+    },
+    {
+      "code": "170456P3",
+      "title": "Emerald Cave Kayak Rental with Optional Vegas Shuttle",
+      "url": "https://www.viator.com/tours/Las-Vegas/Emerald-Cave-Kayak-Rental-with-Optional-Shuttle-from-Las-Vegas/d684-170456P3?mcid=42383&pid=P00282225&medium=api&api_version=2.0&campaign=emeraldcavevegas-operators",
+      "thumb": "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-400x400/0b/a9/8e/fc.jpg",
+      "rating": 4.8321166,
+      "reviews": 274,
+      "price": 79.0,
+      "currency": "USD",
+      "duration_minutes": 360,
+      "flags": [
+        "FREE_CANCELLATION",
+        "LIKELY_TO_SELL_OUT"
+      ],
+      "score": 105
+    },
+    {
+      "code": "170456P1",
+      "title": "Emerald Cave Kayak Tour: Scenic Paddle with Optional Shuttle",
+      "url": "https://www.viator.com/tours/Las-Vegas/Emerald-Cave-Kayak-Tour/d684-170456P1?mcid=42383&pid=P00282225&medium=api&api_version=2.0&campaign=emeraldcavevegas-operators",
+      "thumb": "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-400x400/07/ae/ad/9b.jpg",
+      "rating": 4.8699803,
+      "reviews": 3038,
+      "price": 89.0,
+      "currency": "USD",
+      "duration_minutes": 360,
+      "flags": [
+        "FREE_CANCELLATION"
+      ],
+      "score": 95
+    },
+    {
+      "code": "240046P1",
+      "title": "Emerald Cave Kayak Experience with Optional Las Vegas Shuttle",
+      "url": "https://www.viator.com/tours/Las-Vegas/Kayak-Emerald-Cave-Express/d684-240046P1?mcid=42383&pid=P00282225&medium=api&api_version=2.0&campaign=emeraldcavevegas-operators",
+      "thumb": "https://media-cdn.tripadvisor.com/media/attractions-splice-spp-400x400/0b/36/d2/10.jpg",
+      "rating": 4.9360356,
+      "reviews": 1579,
+      "price": 109.99,
+      "currency": "USD",
+      "duration_minutes": 180,
+      "flags": [
+        "FREE_CANCELLATION"
+      ],
+      "score": 95
+    }
+  ]
+}

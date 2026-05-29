@@ -21,8 +21,11 @@ index.html).
 
 Usage:
   python scripts/fetch-viator-emeraldcave.py
+  # operators-page variant with its own attribution campaign:
+  python scripts/fetch-viator-emeraldcave.py --campaign emeraldcavevegas-operators --out emerald-cave-tours-operators.json
 """
 
+import argparse
 import json
 import time
 import urllib.request
@@ -156,8 +159,17 @@ def pick_thumb(p: dict) -> str | None:
 
 
 def main():
+    global CAMPAIGN, OUT_PATH
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--campaign", default=CAMPAIGN, help="Viator productUrl campaign tag (attribution)")
+    ap.add_argument("--out", default=None, help="output JSON filename (relative to project root)")
+    args = ap.parse_args()
+    CAMPAIGN = args.campaign
+    if args.out:
+        OUT_PATH = PROJECT_ROOT / args.out
+
     api_key = load_api_key()
-    print(f"Searching Las Vegas (d{LAS_VEGAS_DEST_ID}) for Emerald Cave kayak tours...")
+    print(f"Searching Las Vegas (d{LAS_VEGAS_DEST_ID}) for Emerald Cave kayak tours... [campaign={CAMPAIGN}]")
     pool = search_products(api_key, LAS_VEGAS_DEST_ID, target=100)
     print(f"  pool={len(pool)}")
 

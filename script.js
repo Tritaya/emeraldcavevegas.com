@@ -118,6 +118,18 @@ document.querySelectorAll([
 // ── OPEN-METEO WEATHER WIDGET ──────────────────────────────
 const weatherEl = document.getElementById('weatherWidget');
 const pill      = document.getElementById('conditionsPill');
+const pillTours = pill ? pill.querySelector('.pill-tours') : null;
+
+// Pill is two buttons: conditions → safety section; tours nudge → booking map.
+// The tours nudge is revealed by the weather callback only on go/caution days
+// (see below) — never pushed when paddling is unsafe.
+if (pill) {
+  const cond = pill.querySelector('.pill-conditions');
+  if (cond) cond.addEventListener('click', () =>
+    document.getElementById('safety').scrollIntoView({ behavior: 'smooth' }));
+  if (pillTours) pillTours.addEventListener('click', () =>
+    document.getElementById('tour-map').scrollIntoView({ behavior: 'smooth' }));
+}
 
 function degToCompass(d) {
   const dirs = ['N','NE','E','SE','S','SW','W','NW'];
@@ -228,6 +240,9 @@ if (weatherEl) {
       if (pill) {
         pill.querySelector('.pill-dot').className = `pill-dot ${vCls}`;
         pill.querySelector('.pill-wind').textContent = `${wind} mph ${dir}`;
+        // Reveal the booking nudge only when it's a reasonable day to paddle
+        // (go/caution); keep it hidden on high-wind 'hold' days.
+        if (pillTours) pillTours.hidden = (vCls === 'hold');
         pill.style.display = 'flex';
       }
     })
@@ -424,7 +439,7 @@ document.addEventListener('keydown', e => {
       map.once('click', () => map.scrollWheelZoom.enable());
     }).catch(() => {
       el.innerHTML = '<p class="tm-mapfail">Map unavailable — Emerald Cave is at 35.8909°N, 114.6856°W, ' +
-        '2.2 mi upstream of Willow Beach Marina. <a href="#maps">See the static maps below.</a></p>';
+        '2.2 mi upstream of Willow Beach Marina, Arizona.</p>';
     });
   }
 
