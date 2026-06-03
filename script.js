@@ -497,6 +497,19 @@ document.addEventListener('keydown', e => {
         { lat: 36.0156, lon: -114.7378, kind: 'poi', icon: '🏞', title: 'Hoover Dam (photo stop)', sub: 'Most combos pause here for photos before continuing east.' },
         { lat: 36.0120, lon: -113.8110, kind: 'book', icon: '◆', title: 'Grand Canyon West', sub: 'Hualapai land — Eagle Point, the Skywalk and Guano Point. About 2.25 hr from Vegas.', featured: 'combo' }
       ]
+    },
+    {
+      id: 'nhMap', featured: 'strip', eyebrow: 'Las Vegas Strip · top night flight',
+      center: [36.11, -115.16], zoom: 12,
+      fail: 'Map unavailable — a Las Vegas night helicopter tour flies a loop over the Strip (Bellagio, the Sphere, the STRAT) and downtown Fremont, departing a heliport near Harry Reid airport.',
+      route: [[36.0490, -115.1725], [36.0955, -115.1761], [36.1126, -115.1767], [36.1203, -115.1626], [36.1475, -115.1566], [36.1706, -115.1430]],
+      pois: [
+        { lat: 36.0490, lon: -115.1725, kind: 'origin', icon: '🚁', title: 'Heliport', sub: 'Most night tours depart a private terminal near Harry Reid airport, just off the south Strip — usually with hotel limo pickup.' },
+        { lat: 36.1126, lon: -115.1767, kind: 'book', icon: '⛲', title: 'The Strip', sub: 'The neon core lit up — Bellagio fountains, Caesars, Paris. Tap to book the night flight.', featured: 'strip' },
+        { lat: 36.1203, lon: -115.1626, kind: 'poi', icon: '⚪', title: 'The Sphere', sub: 'The Exosphere LED globe — a surreal sight from the air after dark.' },
+        { lat: 36.1475, lon: -115.1566, kind: 'poi', icon: '🗼', title: 'The STRAT', sub: 'The 350 m tower marking the north end of the Strip flyover.' },
+        { lat: 36.1706, lon: -115.1430, kind: 'poi', icon: '🎆', title: 'Downtown / Fremont', sub: 'The Fremont Street canopy and old Vegas — the northern turn on many loops.' }
+      ]
     }
   ];
   if (!MAPS.some(function (m) { return document.getElementById(m.id); })) return;
@@ -570,7 +583,7 @@ document.addEventListener('keydown', e => {
       if (featured) featured.openPopup();
       map.once('click', function () { map.scrollWheelZoom.enable(); });
     }).catch(function () {
-      el.innerHTML = '<p class="tm-mapfail">Map unavailable — Hoover Dam is ~35 mi south-east of the Las Vegas Strip via US-93; Grand Canyon West is ~120 mi (a separate, longer trip).</p>';
+      el.innerHTML = '<p class="tm-mapfail">' + (cfg.fail || 'Map unavailable — Hoover Dam is ~35 mi south-east of the Las Vegas Strip via US-93; Grand Canyon West is ~120 mi (a separate, longer trip).') + '</p>';
     });
   }
   MAPS.forEach(function (cfg) {
