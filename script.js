@@ -469,3 +469,118 @@ document.addEventListener('keydown', e => {
     initMap();
   }
 })();
+
+// ── HOOVER DAM TOURS PAGE — two route maps (#hdMapDam, #hdMapCombo) ──────────
+// Reuses the .ec-pin / .ec-cardpop / .ec-pop classes and the global .vlink
+// handler above. Each map lazy-loads Leaflet on scroll. No-ops on other pages.
+(function () {
+  'use strict';
+  var MAPS = [
+    {
+      id: 'hdMapDam', featured: 'dam', eyebrow: 'Hoover Dam · top half-day tour',
+      center: [36.05, -114.95], zoom: 10,
+      route: [[36.1147, -115.1728], [35.9785, -114.8344], [36.0156, -114.7378]],
+      pois: [
+        { lat: 36.1147, lon: -115.1728, kind: 'origin', icon: '★', title: 'Las Vegas Strip', sub: 'Tours depart here with hotel pickup — about 45 minutes to the dam.' },
+        { lat: 35.9785, lon: -114.8344, kind: 'poi', icon: '◆', title: 'Boulder City', sub: 'The last town before the dam, on US-93.' },
+        { lat: 36.0156, lon: -114.7378, kind: 'book', icon: '🏞', title: 'Hoover Dam', sub: '726-ft dam on the Colorado River — visitor center, powerplant tour, and the dam-crest walk.', featured: 'dam' },
+        { lat: 36.0125, lon: -114.7414, kind: 'poi', icon: '◆', title: 'Memorial Bridge', sub: 'The free pedestrian walkway with the best head-on view of the dam.' },
+        { lat: 36.0100, lon: -114.7967, kind: 'poi', icon: '≋', title: 'Lake Mead', sub: 'The reservoir behind the dam; some tours add a Boulder Basin stop.' }
+      ]
+    },
+    {
+      id: 'hdMapCombo', featured: 'combo', eyebrow: 'Grand Canyon West · most-booked combo',
+      center: [36.04, -114.5], zoom: 9,
+      route: [[36.1147, -115.1728], [36.0156, -114.7378], [35.9930, -114.3690], [36.0120, -113.8110]],
+      pois: [
+        { lat: 36.1147, lon: -115.1728, kind: 'origin', icon: '★', title: 'Las Vegas Strip', sub: 'Early-morning pickup, back by evening — a 10+ hour day.' },
+        { lat: 36.0156, lon: -114.7378, kind: 'poi', icon: '🏞', title: 'Hoover Dam (photo stop)', sub: 'Most combos pause here for photos before continuing east.' },
+        { lat: 36.0120, lon: -113.8110, kind: 'book', icon: '◆', title: 'Grand Canyon West', sub: 'Hualapai land — Eagle Point, the Skywalk and Guano Point. About 2.25 hr from Vegas.', featured: 'combo' }
+      ]
+    }
+  ];
+  if (!MAPS.some(function (m) { return document.getElementById(m.id); })) return;
+
+  var LEAFLET_CSS = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+  var LEAFLET_JS  = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+  function loadLeaflet() {
+    if (window.L) return Promise.resolve(window.L);
+    return new Promise(function (resolve, reject) {
+      var css = document.createElement('link');
+      css.rel = 'stylesheet'; css.href = LEAFLET_CSS; document.head.appendChild(css);
+      var s = document.createElement('script');
+      s.src = LEAFLET_JS;
+      s.onload = function () { resolve(window.L); };
+      s.onerror = function () { reject(new Error('Leaflet failed')); };
+      document.head.appendChild(s);
+    });
+  }
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]);
+    });
+  }
+  function featuredCardHtml(deck, eyebrow) {
+    var top = document.querySelector('.ec-tour[data-deck="' + deck + '"]');
+    if (!top) return '';
+    var vurl   = top.getAttribute('data-vurl');
+    var thumb  = (top.querySelector('.ec-thumb')  || {}).src || '';
+    var title  = (top.querySelector('.ec-title')  || {}).textContent || '';
+    var rating = (top.querySelector('.ec-rating') || {}).textContent || '';
+    var price  = (top.querySelector('.ec-price')  || {}).textContent || '';
+    var meta   = [rating, price].filter(Boolean).join(' · ');
+    return '<a class="vlink ec-pop-card" data-vurl="' + vurl + '" role="link" rel="sponsored nofollow noopener" tabindex="0">' +
+      (thumb ? '<img class="ec-pop-img" src="' + esc(thumb) + '" alt="" loading="lazy" width="220" height="132">' : '') +
+      '<span class="ec-pop-cardbody">' +
+      '<span class="ec-pop-eyebrow">' + esc(eyebrow) + '</span>' +
+      '<strong class="ec-pop-cardtitle">' + esc(title) + '</strong>' +
+      (meta ? '<span class="ec-pop-cardmeta">' + esc(meta) + '</span>' : '') +
+      '<span class="ec-pop-cardcta">Check availability →</span>' +
+      '</span></a>';
+  }
+  function initOne(cfg) {
+    var el = document.getElementById(cfg.id);
+    if (!el || el.dataset.initialized) return;
+    el.dataset.initialized = '1';
+    loadLeaflet().then(function (L) {
+      var map = L.map(el, { scrollWheelZoom: false }).setView(cfg.center, cfg.zoom);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>', maxZoom: 18
+      }).addTo(map);
+      L.polyline(cfg.route, { color: '#1d5c4d', weight: 4, opacity: 0.85, dashArray: '1,8', lineCap: 'round' }).addTo(map);
+      var group = L.featureGroup();
+      var featured = null;
+      cfg.pois.forEach(function (p) {
+        var m = L.marker([p.lat, p.lon], {
+          icon: L.divIcon({ className: '', html: '<span class="ec-pin ec-pin-' + p.kind + '">' + p.icon + '</span>',
+            iconSize: [30, 30], iconAnchor: [15, 15], popupAnchor: [0, -16] })
+        });
+        if (p.featured) {
+          m.bindPopup(featuredCardHtml(p.featured, cfg.eyebrow), { maxWidth: 240, minWidth: 220, className: 'ec-cardpop', autoPan: true, autoPanPadding: [26, 26] });
+          featured = m;
+        } else {
+          m.bindPopup('<div class="ec-pop"><strong class="ec-pop-title">' + esc(p.title) + '</strong>' +
+            '<span class="ec-pop-sub">' + esc(p.sub) + '</span></div>', { maxWidth: 240, minWidth: 200 });
+        }
+        m.addTo(group);
+      });
+      group.addTo(map);
+      var b = group.getBounds();
+      if (b.isValid()) map.fitBounds(b.pad(0.15), { maxZoom: cfg.zoom + 1, animate: false });
+      if (featured) featured.openPopup();
+      map.once('click', function () { map.scrollWheelZoom.enable(); });
+    }).catch(function () {
+      el.innerHTML = '<p class="tm-mapfail">Map unavailable — Hoover Dam is ~35 mi south-east of the Las Vegas Strip via US-93; Grand Canyon West is ~120 mi (a separate, longer trip).</p>';
+    });
+  }
+  MAPS.forEach(function (cfg) {
+    var el = document.getElementById(cfg.id);
+    if (!el) return;
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { initOne(cfg); io.unobserve(e.target); } });
+      }, { rootMargin: '200px' });
+      io.observe(el);
+    } else { initOne(cfg); }
+  });
+})();

@@ -591,3 +591,8 @@ blockquote.editorial cite {
   html { font-size: 16px; }
   .photo-strip { grid-template-columns: 1fr; }
 }
+
+/* Hoover Dam page — extra map pin kinds (reuse .ec-pin base) */
+.ec-pin-book   { background: var(--accent); border-color: #fff; color: #fff; }
+.ec-pin-origin { background: #33302c; border-color: #fff; color: #fff; }
+.ec-pin-poi    { background: #3d6b8e; border-color: #fff; color: #fff; }
