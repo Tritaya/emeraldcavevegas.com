@@ -549,6 +549,18 @@ document.addEventListener('keydown', e => {
         { lat: 36.4587, lon: -116.8714, kind: 'poi', icon: '✨', title: 'Death Valley', sub: 'About 2 hours — the hottest, lowest and one of the darkest national parks in the US.' },
         { lat: 36.0120, lon: -113.8110, kind: 'book', icon: '◆', title: 'Grand Canyon West', sub: 'About 2.25 hours — the Skywalk and the canyon rim on Hualapai land; the most-booked day trip.', featured: 'canyon' }
       ]
+    },
+    {
+      id: 'acMap', featured: 'antelope', eyebrow: 'Page, AZ · top Antelope Canyon tour',
+      center: [36.5, -113.3], zoom: 7,
+      fail: 'Map unavailable — Antelope Canyon and Horseshoe Bend are near Page, Arizona, about 270 miles / 4.5 hours east of Las Vegas (a long day trip or an overnight).',
+      route: [[36.1147, -115.1728], [36.7958, -111.4239]],
+      pois: [
+        { lat: 36.1147, lon: -115.1728, kind: 'origin', icon: '🎰', title: 'Las Vegas', sub: 'Your start — about 270 miles / 4.5 hours west of Page. A long day trip, or better as an overnight.' },
+        { lat: 36.8619, lon: -111.3743, kind: 'poi', icon: '🔦', title: 'Upper Antelope Canyon', sub: 'The Crack — flat walk-in and the famous midday light beams (Apr to early Oct); pricier.' },
+        { lat: 36.7958, lon: -111.4239, kind: 'book', icon: '◆', title: 'Lower Antelope Canyon', sub: 'The Corkscrew — ladders and stairs, fewer crowds, cheaper; the most-booked Vegas tour.', featured: 'antelope' },
+        { lat: 36.8791, lon: -111.5104, kind: 'poi', icon: '🐎', title: 'Horseshoe Bend', sub: 'The 270-degree Colorado River bend, ~10 minutes away — on nearly every tour.' }
+      ]
     }
   ];
   if (!MAPS.some(function (m) { return document.getElementById(m.id); })) return;
