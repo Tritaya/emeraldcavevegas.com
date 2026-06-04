@@ -295,6 +295,24 @@ blockquote.voice cite { font-size: .78rem; color: var(--muted); font-style: norm
 .data-table td { padding: .55rem .8rem; border-bottom: 1px solid var(--border); vertical-align: top; }
 .data-table td:first-child { font-weight: 700; }
 
+/* Content cards + chips (stargazing / natural-attractions comparison & feature cards) */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(248px, 1fr)); gap: 1.25rem; margin: 1.6rem 0; }
+.gem-card { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.1rem 1.2rem; }
+.gem-card h3 { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; margin: 0 0 .5rem; }
+.gem-card p { font-size: .93rem; color: var(--muted); margin: 0; line-height: 1.5; }
+.card-chip-row { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .9rem; }
+.chip { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .02em; padding: .28em .7em; border-radius: 4px; background: var(--bg-alt); border: 1px solid var(--border); color: var(--muted); text-decoration: none; white-space: nowrap; }
+.chip.accent { background: var(--accent); color: #fff; border-color: var(--accent); }
+.chip.accent:hover { opacity: .9; }
+@media (max-width: 640px) { .card-grid { grid-template-columns: 1fr; } }
+
+/* CTA box + button (book-a-tour blocks on the new guide pages) */
+.tours-cta-section { background: var(--accent-lt); border: 1px solid var(--border); border-radius: 10px; padding: 1.4rem 1.5rem; margin: 1.9rem 0 .5rem; text-align: center; }
+.tours-cta-section h3 { font-family: var(--serif); font-size: 1.2rem; font-weight: 700; margin: 0 0 .4rem; }
+.tours-cta-section p { color: var(--muted); font-size: .95rem; margin: 0 auto 1rem; max-width: 56ch; }
+.hero-cta { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; font-size: .95rem; padding: .7em 1.4em; border-radius: 6px; text-decoration: none; }
+.hero-cta:hover { opacity: .92; }
+
 .rtag {
   display: inline-block; background: var(--accent); color: #fff;
   font-size: .7rem; font-weight: 700; padding: .12em .45em; border-radius: 2px;

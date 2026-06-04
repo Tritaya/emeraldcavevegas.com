@@ -510,6 +510,45 @@ document.addEventListener('keydown', e => {
         { lat: 36.1475, lon: -115.1566, kind: 'poi', icon: '🗼', title: 'The STRAT', sub: 'The 350 m tower marking the north end of the Strip flyover.' },
         { lat: 36.1706, lon: -115.1430, kind: 'poi', icon: '🎆', title: 'Downtown / Fremont', sub: 'The Fremont Street canopy and old Vegas — the northern turn on many loops.' }
       ]
+    },
+    {
+      id: 'crMap', featured: 'river', eyebrow: 'Black Canyon · top Emerald Cave kayak',
+      center: [35.93, -114.71], zoom: 11,
+      fail: 'Map unavailable — the Colorado River tours run the Black Canyon below Hoover Dam, past the hot springs and Emerald Cave down to Willow Beach (about an hour from the Strip).',
+      route: [[36.0156, -114.7378], [35.9756, -114.7290], [35.890861, -114.6855819], [35.8677, -114.6705]],
+      pois: [
+        { lat: 36.0156, lon: -114.7378, kind: 'origin', icon: '🏞', title: 'Hoover Dam', sub: 'Where the motorized raft tours and full-day kayak tours launch — authorized outfitters only, inside the security zone.' },
+        { lat: 35.9756, lon: -114.7290, kind: 'poi', icon: '♨', title: 'Arizona Hot Springs', sub: 'Slot-canyon geothermal pools on the full-day kayak run; the hiking trail closes ~mid-May to Sept for extreme heat.' },
+        { lat: 35.890861, lon: -114.6855819, kind: 'book', icon: '◆', title: 'Emerald Cave', sub: 'The emerald-glowing alcove, ~2 mi upstream of Willow Beach — the signature half-day paddle.', featured: 'river' },
+        { lat: 35.8677, lon: -114.6705, kind: 'origin', icon: '🛶', title: 'Willow Beach', sub: 'The no-permit public launch — Emerald Cave kayak tours and rentals put in here.' }
+      ]
+    },
+    {
+      id: 'sgMap', featured: 'stars', eyebrow: 'Dark skies near Vegas · top stargazing tour',
+      center: [36.30, -115.90], zoom: 8,
+      fail: 'Map unavailable — to stargaze near Las Vegas you escape the city glow: Red Rock (~30 min), the dark Black Canyon river, or Death Valley International Dark Sky Park (~2 hours).',
+      route: [[36.1147, -115.1728], [36.4587, -116.8714]],
+      pois: [
+        { lat: 36.1147, lon: -115.1728, kind: 'origin', icon: '🌃', title: 'Las Vegas Strip', sub: 'One of the brightest night skies on Earth — the glow you drive away from to find stars.' },
+        { lat: 36.1356, lon: -115.4279, kind: 'poi', icon: '◆', title: 'Red Rock Canyon', sub: 'Closest dark-ish escape, ~30 min west — but city skyglow still touches the eastern horizon.' },
+        { lat: 35.8677, lon: -114.6705, kind: 'poi', icon: '🛶', title: 'Black Canyon / Willow Beach', sub: 'Dark desert river — stars over the water after a twilight or moonlight paddle.' },
+        { lat: 36.4587, lon: -116.8714, kind: 'book', icon: '✨', title: 'Death Valley', sub: 'Gold-tier International Dark Sky Park, ~2 hours from the Strip — the real stargazing trip.', featured: 'stars' }
+      ]
+    },
+    {
+      id: 'naMap', featured: 'canyon', eyebrow: 'Day trips · most-booked from Vegas',
+      center: [36.25, -115.2], zoom: 8,
+      fail: 'Map unavailable — Las Vegas is ringed by natural wonders: Red Rock (~30 min), Valley of Fire and Mt Charleston (~1 hr), Hoover Dam and Lake Mead (~45 min), and Death Valley and Grand Canyon West (~2 hr).',
+      route: [],
+      pois: [
+        { lat: 36.1147, lon: -115.1728, kind: 'origin', icon: '🎰', title: 'Las Vegas', sub: 'The Strip — your base. Every natural wonder below is a drive away.' },
+        { lat: 36.1356, lon: -115.4279, kind: 'poi', icon: '🏜', title: 'Red Rock Canyon', sub: 'About 30 minutes west — red sandstone cliffs and a scenic loop, the closest escape.' },
+        { lat: 36.4989, lon: -114.5341, kind: 'poi', icon: '🔥', title: 'Valley of Fire', sub: 'About an hour northeast — flaming-red sandstone and petroglyphs; the oldest state park in Nevada.' },
+        { lat: 36.2642, lon: -115.6055, kind: 'poi', icon: '🌲', title: 'Mt Charleston', sub: 'About 45 minutes northwest — alpine forest near 7,700 ft, 20 to 30F cooler than the valley.' },
+        { lat: 36.0156, lon: -114.7378, kind: 'poi', icon: '🏞', title: 'Hoover Dam & Black Canyon', sub: 'About 45 minutes — the dam, Lake Mead and the emerald Colorado River.' },
+        { lat: 36.4587, lon: -116.8714, kind: 'poi', icon: '✨', title: 'Death Valley', sub: 'About 2 hours — the hottest, lowest and one of the darkest national parks in the US.' },
+        { lat: 36.0120, lon: -113.8110, kind: 'book', icon: '◆', title: 'Grand Canyon West', sub: 'About 2.25 hours — the Skywalk and the canyon rim on Hualapai land; the most-booked day trip.', featured: 'canyon' }
+      ]
     }
   ];
   if (!MAPS.some(function (m) { return document.getElementById(m.id); })) return;
