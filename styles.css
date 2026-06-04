@@ -312,6 +312,8 @@ blockquote.voice cite { font-size: .78rem; color: var(--muted); font-style: norm
 .tours-cta-section p { color: var(--muted); font-size: .95rem; margin: 0 auto 1rem; max-width: 56ch; }
 .hero-cta { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; font-size: .95rem; padding: .7em 1.4em; border-radius: 6px; text-decoration: none; }
 .hero-cta:hover { opacity: .92; }
+.u-link { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.faq-list { margin-top: .6rem; }
 
 .rtag {
   display: inline-block; background: var(--accent); color: #fff;
