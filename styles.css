@@ -616,3 +616,12 @@ blockquote.editorial cite {
 .ec-pin-book   { background: var(--accent); border-color: #fff; color: #fff; }
 .ec-pin-origin { background: #33302c; border-color: #fff; color: #fff; }
 .ec-pin-poi    { background: #3d6b8e; border-color: #fff; color: #fff; }
+
+/* ── op-widget (homepage second-conversion GYG auto-widget) + steps-list (rental page) ── */
+.op-widget{margin-top:2.5rem;padding-top:1.75rem;border-top:1px solid var(--border)}
+.op-widget-h{font-family:var(--serif);font-size:1.3rem;margin:0 0 .35rem;color:var(--text)}
+.op-widget-sub{color:var(--muted);margin:0 0 1.25rem;max-width:62ch;line-height:1.55}
+.op-widget-sub a{color:var(--accent);font-weight:600}
+.steps-list{margin:1rem 0 1.25rem;padding-left:1.4rem}
+.steps-list li{margin:0 0 .85rem;line-height:1.65}
+.steps-list li strong{color:var(--text)}
