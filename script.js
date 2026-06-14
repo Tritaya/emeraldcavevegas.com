@@ -135,6 +135,7 @@ if (pill) {
   if (pillTours) pillTours.addEventListener('click', () => {
     const map = document.getElementById('tour-map');
     if (map) map.scrollIntoView({ behavior: 'smooth' });
+    else window.location.href = 'index.html#tour-map';
   });
 }
 
@@ -256,9 +257,7 @@ if (weatherEl || pill) {
       if (pill) {
         pill.querySelector('.pill-dot').className = `pill-dot ${vCls}`;
         pill.querySelector('.pill-wind').textContent = `${wind} mph ${dir}`;
-        // Reveal the booking nudge only when it's a reasonable day to paddle
-        // (go/caution); keep it hidden on high-wind 'hold' days.
-        if (pillTours) pillTours.hidden = (vCls === 'hold');
+        // (booking nudge is always visible now — shown on init, not weather-gated)
         pill.style.display = 'flex';
       }
     })
@@ -272,7 +271,8 @@ if (weatherEl || pill) {
 if (pill) {
   const heroEnd = document.querySelector('.facts-bar') || document.querySelector('.hero');
   const obs = new IntersectionObserver(([e]) => {
-    if (!e.isIntersecting && conditionsLoaded)
+    // Show once scrolled past the hero — NOT gated on the weather fetch.
+    if (!e.isIntersecting)
       pill.style.display = 'flex';
     else
       pill.style.display = 'none';
