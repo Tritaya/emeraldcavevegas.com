@@ -12,11 +12,13 @@ RANKED = os.path.join(HERE, "gyg-emeraldcave-ranked.json")
 
 def thumb(url):
     # Scraped full-res form is  cdn.getyourguide.com/image/99/tour_img/<hash>.<ext>
-    # The small 92px thumb form (what the gallery uses, returns 200) is
+    # Format 134 = 180x180 (~4 KB), right for a 92px thumb at 2x. Format 99 is NOT a
+    # thumb any more: it serves 1585x792 (~165 KB) as of 2026-09-12. Codes probed in
+    # memory reference_gyg_cdn_image_format_codes. The 92px form is
     #   cdn.getyourguide.com/img/tour/<hash>.<ext>/99.jpg   (NOT image/99/tour_img/.../99.jpg → 404)
     m = re.search(r"/tour_img/([^/]+?\.(?:jpe?g|png))$", url, re.I)
     if m:
-        return f"https://cdn.getyourguide.com/img/tour/{m.group(1)}/99.jpg"
+        return f"https://cdn.getyourguide.com/img/tour/{m.group(1)}/134.jpg"
     return url
 
 def tidy(title):

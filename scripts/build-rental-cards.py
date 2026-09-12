@@ -19,7 +19,7 @@ def clean(t):
     return re.sub(r"\s*[-–]\s*20\d\d\s*\(.*?\)\s*$", "", t.get("title") or "").strip()
 def _thumb_url(u):
     m = re.search(r"/tour_img/([^/]+?\.(?:jpe?g|png))$", u, re.I)
-    return f"https://cdn.getyourguide.com/img/tour/{m.group(1)}/99.jpg" if m else u
+    return f"https://cdn.getyourguide.com/img/tour/{m.group(1)}/134.jpg" if m else u  # 134 = 180x180 (~4 KB); 99 is 1585px now
 
 def thumb(t, used):
     """First image not already used by a prior card (sibling tours share image lists)."""
