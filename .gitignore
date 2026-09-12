@@ -1,0 +1,6 @@
+# build tooling
+_*.py
+*.bak
+.netlify
+# raw ChatGPT generations (delivered webp lives in img/)
+img/raw/

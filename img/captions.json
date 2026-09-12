@@ -1,0 +1,156 @@
+{
+ "emerald-cave": {
+  "alt": "Inside Emerald Cave on the Colorado River: dark volcanic walls lit from below by emerald-green water, with two kayakers at the cave mouth",
+  "caption": "The glow is light physics: midday sun through the south-facing mouth, clear water, algae on the riverbed reflecting green. It needs a clear sky, flat water and a high sun.",
+  "kind": "hero",
+  "w": 1200,
+  "h": 630
+ },
+ "emerald-cave-tour-operators": {
+  "alt": "Kayaks lined up on the Willow Beach launch ramp with a guide briefing a group, Black Canyon upstream",
+  "caption": "Willow Beach: where every half-day tour and every rental launches. Two miles upstream is the cave.",
+  "kind": "hero",
+  "w": 1200,
+  "h": 630
+ },
+ "emerald-cave-kayak-rental": {
+  "alt": "A lone paddler in a rented sit-on-top kayak heading upstream through Black Canyon on calm green water",
+  "caption": "Self-guided: about 2.2 miles upstream from Willow Beach on flat, cold water, then the same way back. Be on the water by 9 am, before the afternoon wind.",
+  "kind": "hero",
+  "w": 1200,
+  "h": 630
+ },
+ "hoover-dam-kayak-launch": {
+  "alt": "Kayaks on the water directly below Hoover Dam with the dam and the bypass bridge towering above",
+  "caption": "The only way onto this water: an NPS-authorized outfitter in the restricted launch window. Twelve miles downstream to Willow Beach.",
+  "kind": "hero",
+  "w": 1200,
+  "h": 630
+ },
+ "is-emerald-cave-worth-it": {
+  "alt": "Four kayaks queuing outside the glowing mouth of Emerald Cave at midday in Black Canyon",
+  "caption": "The cave fits three to six kayaks. Midday on a summer weekend means a queue; the 3 to 4 pm sparkle window is usually empty.",
+  "kind": "hero",
+  "w": 1200,
+  "h": 630
+ },
+ "las-vegas-colorado-river-tours": {
+  "alt": "A raft and kayaks drifting down the calm Colorado River through Black Canyon, with a steaming hot-spring side canyon",
+  "caption": "Kayak, raft or float: one calm stretch of river, Class I flatwater, no rapids, cold and clear all year.",
+  "kind": "hero",
+  "w": 1200,
+  "h": 630
+ },
+ "las-vegas-stargazing-tour": {
+  "alt": "The Milky Way over the red sandstone of Red Rock Canyon with the faint glow of Las Vegas on the horizon and two people at a telescope",
+  "caption": "Stargazing in Vegas means leaving Vegas: the Strip is a Bortle 9 sky, Red Rock is thirty minutes away. Plan by the moon, not the calendar.",
+  "kind": "hero",
+  "w": 1200,
+  "h": 630
+ },
+ "natural-attractions-near-las-vegas": {
+  "alt": "The red and cream sandstone of the Calico Hills at Red Rock Canyon with the scenic loop road and two hikers",
+  "caption": "Red Rock Canyon, seventeen miles from the Strip: the closest escape and the first rung on the ladder of day trips.",
+  "kind": "hero",
+  "w": 1200,
+  "h": 630
+ },
+ "tours-from-las-vegas-to-antelope-canyon": {
+  "alt": "The swirling sandstone walls of Lower Antelope Canyon with a steel staircase and two visitors with a guide",
+  "caption": "Lower Antelope: ladders and stairs, fewer people, no light beams. Upper is the flat walk-in with the midday beams. Navajo-guided only, either way.",
+  "kind": "hero",
+  "w": 1200,
+  "h": 630
+ },
+ "vegas-night-helicopter-tour": {
+  "alt": "A sightseeing helicopter over the Las Vegas Strip at night with the lit resort corridor below",
+  "caption": "Ten to fifteen minutes in the air: up the Strip, on to downtown and the STRAT, and back. Strip only, no canyon after dark.",
+  "kind": "hero",
+  "w": 1200,
+  "h": 630
+ },
+ "hoover-dam-tours-from-las-vegas": {
+  "alt": "Hoover Dam from the memorial bridge walkway, with the intake towers and the road across the crest",
+  "caption": "The best view is free: the bridge walkway. Dam tickets are separate from any Vegas tour fare.",
+  "kind": "hero",
+  "w": 1200,
+  "h": 630
+ },
+ "emerald-cave-glow-windows": {
+  "alt": "Timeline of when Emerald Cave glows: the 10 am to 2 pm primary window with an 11 to 1 peak, the 3 to 4 pm sparkle window, and the winter shift to 10 to 11 am",
+  "caption": "Two windows, one cave. The midday glow is the famous one; the afternoon sparkle is the quiet one.",
+  "kind": "info",
+  "w": 1200,
+  "h": 675
+ },
+ "emerald-cave-season-guide": {
+  "alt": "Season guide for Emerald Cave: October to April recommended, March to May windy, June to August hot with queues, September to November shoulder season",
+  "caption": "The cave fits three to six kayaks at a time, which is why the calendar matters as much as the clock.",
+  "kind": "info",
+  "w": 1200,
+  "h": 675
+ },
+ "rent-vs-guided-emerald-cave": {
+  "alt": "Comparison of renting a kayak for Emerald Cave versus taking a guided tour: price, pace, guidance, logistics and who each suits",
+  "caption": "Same launch, same route, same cave. The difference is freedom and price against a leader and zero planning.",
+  "kind": "info",
+  "w": 1200,
+  "h": 675
+ },
+ "hoover-dam-kayak-launch-rules": {
+  "alt": "The rules for kayaking from Hoover Dam: no self-launch at the security zone, NPS-authorized outfitters only, the $30 to $32 permit, the $25 vehicle fee, and the 12-mile route",
+  "caption": "No walk-up launch exists at the dam. The permit is per person and mandatory; ask whether it is in the price.",
+  "kind": "info",
+  "w": 1200,
+  "h": 675
+ },
+ "black-canyon-hazards": {
+  "alt": "The three hazards on the Colorado River at Black Canyon: afternoon wind, 54 degree water, and drowning without a life jacket",
+  "caption": "Guides, rangers and rescue teams report the same three. All three are handled by launching early and keeping the jacket on.",
+  "kind": "info",
+  "w": 1200,
+  "h": 675
+ },
+ "emerald-cave-worth-it-verdict": {
+  "alt": "Three ways an Emerald Cave visit can go: the midday glow with its queue, the quiet 3 to 4 pm sparkle, and the wrong window with no glow",
+  "caption": "The disappointed reviews are almost all the third panel. Pick the window, then the tour.",
+  "kind": "info",
+  "w": 1200,
+  "h": 675
+ },
+ "colorado-river-tours-modes": {
+  "alt": "Comparison of the three ways to travel the Colorado River below Hoover Dam: kayak, motor-assisted raft and float, all on Class I flatwater",
+  "caption": "One stretch of water, three ways to travel it. None of them involve rapids.",
+  "kind": "info",
+  "w": 1200,
+  "h": 675
+ },
+ "natural-attractions-near-las-vegas-distance-ladder": {
+  "alt": "Distance ladder of natural attractions from the Las Vegas Strip, from Red Rock Canyon at 30 minutes to Antelope Canyon at 4.5 hours",
+  "caption": "Plan by the hours you have. Everything above Valley of Fire is a full day.",
+  "kind": "info",
+  "w": 1200,
+  "h": 675
+ },
+ "upper-vs-lower-antelope-canyon": {
+  "alt": "Comparison of Upper and Lower Antelope Canyon: terrain, light beams, crowds, price and access, both Navajo-guided only",
+  "caption": "Most Vegas tours make you pick one. The beams are Upper's; the quiet is Lower's.",
+  "kind": "info",
+  "w": 1200,
+  "h": 675
+ },
+ "hoover-dam-tours-half-day-vs-combo": {
+  "alt": "Hoover Dam tours from Las Vegas compared: the half-day dam tour versus the Grand Canyon West combo, and the three separate dam tickets",
+  "caption": "Your tour fare and your dam ticket are different purchases. The deep Guided Dam Tour is self-drive-only in practice.",
+  "kind": "info",
+  "w": 1200,
+  "h": 675
+ },
+ "las-vegas-stargazing-timing": {
+  "alt": "Stargazing timing near Las Vegas: plan around the new moon, Milky Way core June to August, winter for Orion, and the drive to Red Rock or Death Valley",
+  "caption": "The moon is the biggest lever. After that, the season decides what you see, and the drive decides how dark it gets.",
+  "kind": "info",
+  "w": 1200,
+  "h": 675
+ }
+}
