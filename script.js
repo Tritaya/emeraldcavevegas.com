@@ -130,12 +130,12 @@ if (pill) {
     // jump to it cross-page.
     const safety = document.getElementById('safety');
     if (safety) safety.scrollIntoView({ behavior: 'smooth' });
-    else window.location.href = 'index.html#safety';
+    else window.location.href = '/#safety';
   });
   if (pillTours) pillTours.addEventListener('click', () => {
     const map = document.getElementById('tour-map');
     if (map) map.scrollIntoView({ behavior: 'smooth' });
-    else window.location.href = 'index.html#tour-map';
+    else window.location.href = '/#tour-map';
   });
 }
 
